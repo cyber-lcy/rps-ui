@@ -26,7 +26,7 @@ html {
 #sorcerer,
 #dragon,
 #golem {
-    transition: all 0.1s ease-in-out;
+    transition: all 0.15s ease-in-out;
     opacity: 1;
 }
 
@@ -36,7 +36,7 @@ html {
 #dragon:hover,
 #golem:hover {
     scale: 1.05;
-    opacity: .7;
+    opacity: .8;
 }
 
 #knight:active,

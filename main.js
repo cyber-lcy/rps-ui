@@ -1,5 +1,5 @@
-/* let playerSelection = null;
-let computerSelection = null; */
+let playerSelection = null;
+let computerSelection = null;
 
 // add a listener to each button to get playerSelection and generate randomized computerSelection
 const choiceButton = document.querySelectorAll('button');
@@ -8,11 +8,12 @@ choiceButton.forEach((choiceButton) => {
         // console.log(choiceButton.dataset.selection);
         playerSelection = choiceButton.dataset.selection;
         computerSelection = getComputerChoice();
-        if (playerSelection !== computerSelection) {
+/*         if (playerSelection !== computerSelection) {
             console.log("NOT EQUAL!");
         } else {
             console.log("EQUAL!");
-        };
+        }; */
+        playRound();
     });
 });
 
@@ -29,4 +30,14 @@ function getComputerChoice () {
     let computerChoice = CHOICES[randomizer];
     // console.log(computerChoice);
     return computerChoice;
+};
+
+function playRound () {
+    if (playerSelection !== computerSelection) {
+        console.log("NOT EQUAL!");
+    } else {
+        console.log("EQUAL!");
+    };
+    console.log(playerSelection);
+    console.log(computerSelection);
 };
