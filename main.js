@@ -1,5 +1,5 @@
-let playerSelection = null;
-let computerSelection = null;
+/* let playerSelection = null;
+let computerSelection = null; */
 
 // add a listener to each button to get playerSelection and generate randomized computerSelection
 const choiceButton = document.querySelectorAll('button');
@@ -16,6 +16,7 @@ choiceButton.forEach((choiceButton) => {
     });
 });
 
+// generate randomized computerChoice from an array
 function getComputerChoice () {
     const CHOICES = [
         "knight",
