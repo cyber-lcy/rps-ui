@@ -1,5 +1,10 @@
+// selection storage
 let playerSelection = null;
 let computerSelection = null;
+
+// score storage
+let playerValue = '';
+let computerValue = '';
 
 
 // add a listener to each button to get playerSelection and generate randomized computerSelection
@@ -73,6 +78,11 @@ function playerWins (playerSelection, computerSelection) {
     rMessage.appendChild(text2);
     rMessage.appendChild(computerImage);
     rMessage.appendChild(text3);
+
+    // raise playerValue and display it
+    const playerScore = document.querySelector('.playerValue');
+    playerValue++;
+    playerScore.textContent = playerValue;
 };
 
 
@@ -95,6 +105,10 @@ function computerWins (playerSelection, computerSelection) {
     rMessage.appendChild(text2);
     rMessage.appendChild(playerImage);
     rMessage.appendChild(text3);
+
+    const computerScore = document.querySelector('.computerValue');
+    computerValue++;
+    computerScore.textContent = computerValue;
 };
 
 
