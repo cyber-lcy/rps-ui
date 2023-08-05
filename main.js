@@ -1,21 +1,17 @@
 let playerSelection = null;
 let computerSelection = null;
 
+
 // add a listener to each button to get playerSelection and generate randomized computerSelection
 const choiceButton = document.querySelectorAll('button');
 choiceButton.forEach((choiceButton) => {
     choiceButton.addEventListener('click', () => {
-        // console.log(choiceButton.dataset.selection);
         playerSelection = choiceButton.dataset.selection;
         computerSelection = getComputerChoice();
-/*         if (playerSelection !== computerSelection) {
-            console.log("NOT EQUAL!");
-        } else {
-            console.log("EQUAL!");
-        }; */
-        playRound();
+        playRound(playerSelection, computerSelection);
     });
 });
+
 
 // generate randomized computerChoice from an array
 function getComputerChoice () {
@@ -28,31 +24,87 @@ function getComputerChoice () {
     ];
     let randomizer = Math.floor(Math.random()*CHOICES.length);
     let computerChoice = CHOICES[randomizer];
-    // console.log(computerChoice);
     return computerChoice;
 };
 
-function playRound () {
+
+function playRound (playerSelection, computerSelection) {
     if (playerSelection === "knight" && computerSelection === "archer" ||
     playerSelection === "knight" && computerSelection === "sorcerer") {
-        console.log(`Your ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} has slayn the enemies ${computerSelection}`);
+        playerWins(playerSelection, computerSelection);
     } else if (playerSelection === "archer" && computerSelection === "sorcerer" ||
     playerSelection === "archer" && computerSelection === "dragon") {
-        console.log(`${playerSelection} shoots down ${computerSelection}`);
+        playerWins(playerSelection, computerSelection);
     } else if (playerSelection === "sorcerer" && computerSelection === "dragon" ||
     playerSelection === "sorcerer" && computerSelection === "golem") {
-        console.log(`Your ${playerSelection} pulverized the enemies ${computerSelection}!`);
+        playerWins(playerSelection, computerSelection);
     } else if ( playerSelection === "dragon" && computerSelection === "golem" ||
     playerSelection === "dragon" && computerSelection === "knight") {
-        console.log(`Your mighty ${playerSelection} burned the enemies ${computerSelection} to ashes!`);
+        playerWins(playerSelection, computerSelection);
     } else if (playerSelection === "golem" && computerSelection === "knight" ||
     playerSelection === "golem" && computerSelection === "archer") {
-        console.log(`Your ${playerSelection} has crushed your enemies ${computerSelection} to dust!`);
+        playerWins(playerSelection, computerSelection);
     } else if (playerSelection === computerSelection) {
-        console.log(`Two of the same kind never fight each other, its a tie!`);
+        tie(playerSelection, computerSelection);
     } else {
-        console.log(`Enemies ${computerSelection} erased your ${playerSelection}...`);
+        computerWins(playerSelection, computerSelection);
     }
-    console.log(playerSelection);
-    console.log(computerSelection);
 };
+
+
+//  behaviour if the player wins a round
+function playerWins (playerSelection, computerSelection) {
+    const rMessage = document.querySelector('.resultMessage');
+    rMessage.textContent = '';
+    
+    const text1 = document.createTextNode('Your ');
+    const text2 = document.createTextNode(`${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} defeated the enemies `);
+    const text3 = document.createTextNode(`${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}! Congratulations, you won!`);
+    
+    // get images to represent player & computer selection
+    const playerImage = document.createElement('img');
+    playerImage.src = `images/${playerSelection}.jpg`;
+    const computerImage = document.createElement('img');
+    computerImage.src = `images/${computerSelection}.jpg`;
+
+    // append the textnodes and images to rMessage in the correct order
+    rMessage.appendChild(text1);
+    rMessage.appendChild(playerImage);
+    rMessage.appendChild(text2);
+    rMessage.appendChild(computerImage);
+    rMessage.appendChild(text3);
+};
+
+
+// behaviour if the computer wins a round
+function computerWins (playerSelection, computerSelection) {
+    const rMessage = document.querySelector('.resultMessage');
+    rMessage.textContent = '';
+    
+    const text1 = document.createTextNode('The enemies ');
+    const text2 = document.createTextNode(`${computerSelection} erased your `);
+    const text3 = document.createTextNode(`${playerSelection}...! You lost!`);
+
+    const computerImage = document.createElement('img');
+    computerImage.src = `images/${computerSelection}.jpg`;
+    const playerImage = document.createElement('img');
+    playerImage.src = `images/${playerSelection}.jpg`; 
+
+    rMessage.appendChild(text1);
+    rMessage.appendChild(computerImage);
+    rMessage.appendChild(text2);
+    rMessage.appendChild(playerImage);
+    rMessage.appendChild(text3);
+};
+
+
+// behaviour if player and computer selected the same options
+function tie () {
+    const rMessage = document.querySelector('.resultMessage');
+    const messageTxt = document.createElement('p');
+    messageTxt.classList.add('resultMessage');
+    messageTxt.textContent = `Two of the same kind never fight each other, its a tie!`;
+    rMessage.parentNode.replaceChild(messageTxt, rMessage);
+};
+
+
