@@ -8,7 +8,7 @@ let computerValue = '';
 
 
 // add a listener to each button to get playerSelection and generate randomized computerSelection
-const choiceButton = document.querySelectorAll('button');
+const choiceButton = document.querySelectorAll('.choice');
 choiceButton.forEach((choiceButton) => {
     choiceButton.addEventListener('click', () => {
         playerSelection = choiceButton.dataset.selection;
@@ -16,6 +16,22 @@ choiceButton.forEach((choiceButton) => {
         playRound(playerSelection, computerSelection);
     });
 });
+
+
+// eventlistener to reset the game
+const resetButton = document.querySelector('#resetButton');
+resetButton.addEventListener('click', () => {
+    const rMessage = document.querySelector('.resultMessage');
+    rMessage.textContent = 'Let the battle begin !!!';
+
+    const playerScore = document.querySelector('.playerValue');
+    playerValue = 0;
+    playerScore.textContent = 0;
+    
+    const computerScore = document.querySelector('.computerValue');
+    computerValue = 0;
+    computerScore.textContent = 0;
+})
 
 
 // generate randomized computerChoice from an array
@@ -33,6 +49,7 @@ function getComputerChoice () {
 };
 
 
+// check if player wins, computer wins or tie
 function playRound (playerSelection, computerSelection) {
     if (playerSelection === "knight" && computerSelection === "archer" ||
     playerSelection === "knight" && computerSelection === "sorcerer") {
@@ -68,9 +85,9 @@ function playerWins (playerSelection, computerSelection) {
     
     // get images to represent player & computer selection
     const playerImage = document.createElement('img');
-    playerImage.src = `images/${playerSelection}.jpg`;
+    playerImage.src = `images/${playerSelection}-new.png`;
     const computerImage = document.createElement('img');
-    computerImage.src = `images/${computerSelection}.jpg`;
+    computerImage.src = `images/${computerSelection}-new.png`;
 
     // append the textnodes and images to rMessage in the correct order
     rMessage.appendChild(text1);
@@ -92,13 +109,13 @@ function computerWins (playerSelection, computerSelection) {
     rMessage.textContent = '';
     
     const text1 = document.createTextNode('The enemies ');
-    const text2 = document.createTextNode(`${computerSelection} erased your `);
-    const text3 = document.createTextNode(`${playerSelection}...! You lost!`);
+    const text2 = document.createTextNode(`${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} erased your `);
+    const text3 = document.createTextNode(`${playerSelection.charAt(0).toUpperCase() +playerSelection.slice(1)}...! You lost!`);
 
     const computerImage = document.createElement('img');
-    computerImage.src = `images/${computerSelection}.jpg`;
+    computerImage.src = `images/${computerSelection}-new.png`;
     const playerImage = document.createElement('img');
-    playerImage.src = `images/${playerSelection}.jpg`; 
+    playerImage.src = `images/${playerSelection}-new.png`; 
 
     rMessage.appendChild(text1);
     rMessage.appendChild(computerImage);

@@ -16,7 +16,7 @@ html::before {
     background-image: url(images/background-forest.jpg);
     background-size: cover;
     position: absolute;
-    opacity: 0.15;
+    opacity: 0.25;
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -27,6 +27,15 @@ body {
     position: relative;
 }
 
+/* rules section styling */
+.rules {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* selection styling */
 .header {
     display: flex;
     justify-content: center;
@@ -43,33 +52,32 @@ body {
 .container > button {
     height: 200px;
     width: auto;
-    border: 0px solid #171717;
+    border: 3px solid grey;
+    border-radius: 16px;
     background: none;
 }
 
-#knight,
-#archer,
-#sorcerer,
-#dragon,
-#golem {
-    transition: all 0.15s ease-in-out;
-    opacity: 1;
+.container > button:active {
+    border: 2px solid #171717;
 }
 
-#knight:hover,
-#archer:hover,
-#sorcerer:hover,
-#dragon:hover,
-#golem:hover {
+.choice {
+    font-family: dancingScript;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    transition: all 0.15s ease-in-out;
+    opacity: 1;
+    filter: grayscale(80%);
+}
+
+.choice:hover {
     scale: 1.05;
     opacity: .8;
 }
 
-#knight:active,
-#archer:active,
-#sorcerer:active,
-#dragon:active,
-#golem:active {
+.choice:active {
     scale: 1;
     opacity: 1;
 }
@@ -110,4 +118,31 @@ button > img {
 .computerScore {
     display: flex;
     gap: 16px;
+}
+
+/*  New Game button styling */
+.reset {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+#resetButton {
+    background: none;
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 4px 8px;
+    color: grey;
+}
+
+#resetButton:hover {
+    color: #f1f1f1;
+    border: 2px solid #f1f1f1;
+    background: #171717;
+}
+
+#resetButton:active {
+    color: #171717;
+    border: 2px solid #171717;
+    background: #f1f1f1;
 }
