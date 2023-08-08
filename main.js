@@ -18,6 +18,26 @@ choiceButton.forEach((choiceButton) => {
 });
 
 
+// blurs out not hovered buttons, removes grayscale from hovered button
+const buttonBlur = document.querySelectorAll('.choice');
+buttonBlur.forEach(choice => {
+    choice.addEventListener('mouseenter', () => {
+        buttonBlur.forEach(otherButton => {
+            if (otherButton !== choice) {
+                otherButton.style.filter = 'blur(2px) grayscale(80%)';
+            } else {
+                otherButton.style.filter = 'blur(0px) grayscale(0%)';
+            };
+        });
+    });
+
+    choice.addEventListener('mouseleave', () => {
+        buttonBlur.forEach(otherButton => {
+            otherButton.style.filter = 'blur(0) grayscale(80%)';
+        });
+    });
+});
+
 // eventlistener to reset the game
 const resetButton = document.querySelector('#resetButton');
 resetButton.addEventListener('click', () => {
